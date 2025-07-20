@@ -9,6 +9,7 @@ serialization and deserialization of instances.
 """
 from uuid import uuid4
 from datetime import datetime
+import models
 
 
 class BaseModel:
@@ -29,6 +30,7 @@ class BaseModel:
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
+        models.store.new(self)
 
     def __str__(self):
         """
@@ -79,3 +81,7 @@ class BaseModel:
             elif key != '__class__':
                 setattr(obj, key, value)
         return obj
+
+    def save(self):
+        self.updated_at = datetime.now()
+        models.store.save()
