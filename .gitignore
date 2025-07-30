@@ -2,5 +2,4 @@ __pycache__/
 *.pyc
 venv/
 todo.json
-todo.py
 file.json
